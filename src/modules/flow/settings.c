@@ -85,8 +85,9 @@ void global_data_reset_param_defaults(void){
 	strcpy(global_data.param_name[PARAM_USART2_BAUD], "USART_2_BAUD");
 	global_data.param_access[PARAM_USART2_BAUD] = READ_ONLY;
 
-	global_data.param[PARAM_USART3_BAUD] = 115200;
-//	global_data.param[PARAM_USART3_BAUD] = 921600;
+//	global_data.param[PARAM_USART3_BAUD] = 115200;
+	global_data.param[PARAM_USART3_BAUD] = 921600;
+//	global_data.param[PARAM_USART3_BAUD] = 57600;
 	strcpy(global_data.param_name[PARAM_USART3_BAUD], "USART_3_BAUD");
 	global_data.param_access[PARAM_USART3_BAUD] = READ_ONLY;
 

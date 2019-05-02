@@ -439,7 +439,10 @@ void mavlink_send_uart_bytes(mavlink_channel_t chan, const uint8_t * ch, uint16_
 	if (chan == MAVLINK_COMM_0)
 	{
 		/* send to UART3 */
-		usart3_tx_ringbuffer_push(ch, length);
+		while(!usart3_tx_ringbuffer_push(ch, length))
+		{
+			delay(2);
+		}
 	}
 	if (chan == MAVLINK_COMM_1)
 	{

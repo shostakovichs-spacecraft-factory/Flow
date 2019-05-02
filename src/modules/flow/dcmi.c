@@ -289,12 +289,15 @@ TODO(NB dma_copy_image_buffers is calling uavcan_run());
  * @param image_buffer_fast_1 Image buffer in fast RAM
  * @param image_buffer_fast_2 Image buffer in fast RAM
  */
+
+#define CALIBRATION_DATA_COMM MAVLINK_COMM_0
+
 void send_calibration_image(uint8_t ** image_buffer_fast_1, uint8_t ** image_buffer_fast_2) {
 
 	/*  transmit raw 8-bit image */
 	/* TODO image is too large for this transmission protocol (too much packets), but it works */
 	mavlink_msg_data_transmission_handshake_send(
-			MAVLINK_COMM_2,
+			CALIBRATION_DATA_COMM,
 			MAVLINK_DATA_STREAM_IMG_RAW8U,
 			FULL_IMAGE_SIZE * 4,
 			FULL_IMAGE_ROW_SIZE * 2,
@@ -317,7 +320,7 @@ void send_calibration_image(uint8_t ** image_buffer_fast_1, uint8_t ** image_buf
 
 		if (i % MAVLINK_MSG_ENCAPSULATED_DATA_FIELD_DATA_LEN == 0 && i != 0)
 		{
-			mavlink_msg_encapsulated_data_send(MAVLINK_COMM_2, frame, frame_buffer);
+			mavlink_msg_encapsulated_data_send(CALIBRATION_DATA_COMM, frame, frame_buffer);
 			frame++;
 			delay(2);
 		}
@@ -362,7 +365,7 @@ void send_calibration_image(uint8_t ** image_buffer_fast_1, uint8_t ** image_buf
 		}
 	}
 
-	mavlink_msg_encapsulated_data_send(MAVLINK_COMM_2, frame, frame_buffer);
+	mavlink_msg_encapsulated_data_send(CALIBRATION_DATA_COMM, frame, frame_buffer);
 
 }
 

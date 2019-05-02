@@ -39,6 +39,7 @@
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_rcc.h"
 #include "misc.h"
+#include "utils.h"
 #include "settings.h"
 
 #define TXBUFFERSIZE   	(64*64) // 4 KByte

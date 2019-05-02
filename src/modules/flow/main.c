@@ -205,14 +205,14 @@ int main(void)
 	LEDOff(LED_ACT);
 	LEDOff(LED_COM);
 	LEDOff(LED_ERR);
-        board_led_rgb(255,255,255, 1);
-        board_led_rgb(  0,  0,255, 0);
-        board_led_rgb(  0,  0, 0, 0);
-        board_led_rgb(255,  0,  0, 1);
-        board_led_rgb(255,  0,  0, 2);
-        board_led_rgb(255,  0,  0, 3);
-                board_led_rgb(  0,255,  0, 3);
-        board_led_rgb(  0,  0,255, 4);
+	board_led_rgb(255,255,255, 1);
+	board_led_rgb(  0,  0,255, 0);
+	board_led_rgb(  0,  0, 0, 0);
+	board_led_rgb(255,  0,  0, 1);
+	board_led_rgb(255,  0,  0, 2);
+	board_led_rgb(255,  0,  0, 3);
+			board_led_rgb(  0,255,  0, 3);
+	board_led_rgb(  0,  0,255, 4);
 
 	/* enable FPU on Cortex-M4F core */
 	SCB_CPACR |= ((3UL << 10 * 2) | (3UL << 11 * 2)); /* set CP10 Full Access and set CP11 Full Access */
@@ -232,6 +232,7 @@ int main(void)
 				&USBD_CDC_cb,
 				&USR_cb);
 
+	usart_init();
 	/* init mavlink */
 	communication_init();
 
@@ -253,9 +254,9 @@ int main(void)
 	/* main loop */
 	while (1)
 	{
-                PROBE_1(false);
-                uavcan_run();
-                PROBE_1(true);
+		PROBE_1(false);
+		uavcan_run();
+		PROBE_1(true);
 		/* reset flow buffers if needed */
 		/*if(buffer_reset_needed)
 		{
@@ -285,12 +286,13 @@ int main(void)
 
 			send_calibration_image(&previous_image, &current_image);
 
+			/*
 			if (FLOAT_AS_BOOL(global_data.param[PARAM_SYSTEM_SEND_STATE]))
 				communication_system_state_send();
-
-			communication_receive_usb();
-			debug_message_send_one();
-			communication_parameter_send();
+			*/
+			//communication_receive_usb();
+			//debug_message_send_one();
+			//communication_parameter_send();
 
 			LEDToggle(LED_COM);
 		}
