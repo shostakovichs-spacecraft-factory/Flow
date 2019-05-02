@@ -267,12 +267,6 @@ void handle_mavlink_message(mavlink_channel_t chan,
 									debug_string_message_buffer("Calibration Mode Off");
 							}
 
-							/* handle sensor position */
-							else if(i == PARAM_GYRO_SENSITIVITY_DPS)
-							{
-								l3gd20_config();
-							}
-
 							/* shutter/ exposure params */
 							else if(i == PARAM_SHTR_W_1 ||
 									i == PARAM_SHTR_W_2 ||

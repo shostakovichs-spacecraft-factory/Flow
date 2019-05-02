@@ -26,20 +26,15 @@ SRCS += 		main.c \
           led.c \
           settings.c \
           communication.c \
-          flow.c \
           dcmi.c \
           mt9v034.c \
-          gyro.c \
           usart.c \
-          sonar.c \
           debug.c \
           usb_bsp.c \
           usbd_cdc_vcp.c \
           usbd_desc.c \
           usbd_usr.c \
-          i2c.c \
           reset.c \
-          sonar_mode_filter.c
 
 SRCS += 	$(ST_LIB)STM32F4xx_StdPeriph_Driver/src/misc.c \
     			$(ST_LIB)STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c \

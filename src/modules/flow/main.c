@@ -198,8 +198,6 @@ int main(void)
 
 	/* load settings and parameters */
 	global_data_reset_param_defaults();
-	global_data_reset();
-	PROBE_INIT();
 	/* init led */
 	LEDInit(LED_ACT);
 	LEDInit(LED_COM);
@@ -242,21 +240,14 @@ int main(void)
 	dma_reconfigure();
 
 	/* init and clear fast image buffers */
-	for (int i = 0; i < global_data.param[PARAM_IMAGE_WIDTH] * global_data.param[PARAM_IMAGE_HEIGHT]; i++)
+	for (int i = 0; i < FULL_IMAGE_SIZE; i++)
 	{
-		image_buffer_8bit_1[i] = 255;
-		image_buffer_8bit_2[i] = 255;
+		image_buffer_8bit_1[i] = 0;
+		image_buffer_8bit_2[i] = 0;
 	}
 
 	uint8_t * current_image = image_buffer_8bit_1;
 	uint8_t * previous_image = image_buffer_8bit_2;
-
-	/* reset/start timers */
-	timer[TIMER_SONAR] = SONAR_TIMER_COUNT;
-	timer[TIMER_SYSTEM_STATE] = SYSTEM_STATE_COUNT;
-	timer[TIMER_RECEIVE] = SYSTEM_STATE_COUNT / 2;
-	timer[TIMER_PARAMS] = PARAMS_COUNT;
-	timer[TIMER_IMAGE] = global_data.param[PARAM_VIDEO_RATE];
 
 	uavcan_start();
 	/* main loop */
